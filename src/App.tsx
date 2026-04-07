@@ -28,16 +28,16 @@ const ImageWithFallback = ({ src, fallbackSrc, alt, className, ...props }: any) 
 
 // ข้อมูลร้านอาหารเริ่มต้น 10 ร้าน
 const INITIAL_RESTAURANTS = [
-  { id: 1, title: "สเต็กเนื้อนุ่ม", img: "/restaurants/1/cover.jpg", fallbackImg: "https://picsum.photos/seed/steak/600/800", rating: "4.8", price: "฿฿", desc: "สเต็กเนื้อนุ่มละมุนลิ้น ย่างเตาถ่านหอมๆ เสิร์ฟพร้อมเฟรนช์ฟรายส์และสลัดผักสดออร์แกนิก บรรยากาศร้านชิลๆ เหมาะกับการมาทานกับเพื่อนหลังเลิกเรียน", tags: ["สเต็ก", "อาหารฝรั่ง"], time: "11:00 - 22:00 น.", videoUrl: "" },
-  { id: 2, title: "ของทอดทานเล่น", img: "/restaurants/2/cover.jpg", fallbackImg: "https://picsum.photos/seed/fried/600/800", rating: "4.5", price: "฿", desc: "รวมมิตรของทอดกรอบอร่อย ทั้งเกี๊ยวทอด ลูกชิ้นทอด และไก่ทอด คลุกผงแซ่บๆ หลากหลายรสชาติ ทอดใหม่ร้อนๆ ทุกออเดอร์", tags: ["ของทานเล่น", "สตรีทฟู้ด"], time: "15:00 - 23:00 น.", videoUrl: "" },
-  { id: 3, title: "ก๋วยเตี๋ยวรสเด็ด", img: "/restaurants/3/cover.jpg", fallbackImg: "https://picsum.photos/seed/noodle/600/800", rating: "4.9", price: "฿", desc: "ก๋วยเตี๋ยวต้มยำน้ำข้น รสชาติจัดจ้าน เครื่องแน่น หมูสับเน้นๆ ไข่ตานีเยิ้มๆ เส้นเหนียวนุ่ม ซดน้ำซุปคล่องคอสุดๆ", tags: ["เส้น", "ต้มยำ"], time: "09:00 - 20:00 น.", videoUrl: "" },
-  { id: 4, title: "ข้าวมันไก่สูตรไหหลำ", img: "/restaurants/4/cover.jpg", fallbackImg: "https://picsum.photos/seed/chickenrice/600/800", rating: "4.7", price: "฿", desc: "ข้าวมันหอมนุ่ม ไก่ต้มเนื้อฉ่ำ ไม่ตบไก่ให้แบน น้ำจิ้มรสเด็ดสูตรต้นตำรับ พร้อมน้ำซุปฟักร้อนๆ ซดคล่องคอ", tags: ["จานเดียว", "ไก่"], time: "07:00 - 15:00 น.", videoUrl: "" },
-  { id: 5, title: "หมูกระทะบุฟเฟต์", img: "/restaurants/5/cover.jpg", fallbackImg: "https://picsum.photos/seed/thaibbq/600/800", rating: "4.6", price: "฿฿", desc: "อิ่มไม่อั้นกับหมูกระทะเตาถ่าน หมูหมักนุ่มๆ สามชั้นสไลด์ และของทานเล่นเพียบ น้ำจิ้มสุกี้รสเด็ด เติมของตลอดไม่มีกั๊ก", tags: ["บุฟเฟต์", "ปิ้งย่าง"], time: "16:00 - 24:00 น.", videoUrl: "" },
-  { id: 6, title: "ยำแซ่บซี๊ด", img: "/restaurants/6/cover.jpg", fallbackImg: "https://picsum.photos/seed/spicysalad/600/800", rating: "4.8", price: "฿฿", desc: "ยำรสแซ่บจัดจ้าน ปลาร้านัวๆ เครื่องแน่นทั้งกุ้งสด หมูยอ ไข่แดงเค็ม เลือกระดับความเผ็ดได้ตามใจชอบ", tags: ["ยำ", "รสจัด"], time: "11:00 - 21:00 น.", videoUrl: "" },
-  { id: 7, title: "คาเฟ่ขนมหวาน", img: "/restaurants/7/cover.jpg", fallbackImg: "https://picsum.photos/seed/cafe/600/800", rating: "4.9", price: "฿฿", desc: "คาเฟ่สไตล์มินิมอล มีทั้งเค้ก บิงซู และเครื่องดื่มหลากหลาย มุมถ่ายรูปเพียบ เหมาะสำหรับมานั่งอ่านหนังสือหรือคุยงาน", tags: ["คาเฟ่", "ของหวาน"], time: "10:00 - 20:00 น.", videoUrl: "" },
-  { id: 8, title: "อาหารตามสั่งป้าสม", img: "/restaurants/8/cover.jpg", fallbackImg: "https://picsum.photos/seed/thaifood/600/800", rating: "4.5", price: "฿", desc: "ร้านอาหารตามสั่งเจ้าเด็ด ข้าวกะเพราหมูกรอบไข่ดาวเยิ้มๆ ให้เยอะจุใจ รสชาติเข้มข้น ราคาเป็นมิตรกับนักศึกษา", tags: ["ตามสั่ง", "จานด่วน"], time: "08:00 - 18:00 น.", videoUrl: "" },
-  { id: 9, title: "ชาบูหม้อไฟ", img: "/restaurants/9/cover.jpg", fallbackImg: "https://picsum.photos/seed/shabu/600/800", rating: "4.7", price: "฿฿฿", desc: "ชาบูน้ำซุปเข้มข้น เนื้อสไลด์พรีเมียม หมูคุโรบูตะ พร้อมน้ำจิ้มพอนสึและสุกี้ มีทั้งแบบ A La Carte และ Buffet", tags: ["ชาบู", "หม้อไฟ"], time: "11:00 - 22:00 น.", videoUrl: "" },
-  { id: 10, title: "โรตีชาชัก", img: "/restaurants/10/cover.jpg", fallbackImg: "https://picsum.photos/seed/roti/600/800", rating: "4.6", price: "฿", desc: "โรตีกรอบนอกนุ่มใน ราดนมข้นหวานฉ่ำๆ ทานคู่กับชาชักรสเข้มข้น หอมกลิ่นชา เมนูแนะนำ: โรตีทิชชู่และชาชักเย็น", tags: ["ของหวาน", "เครื่องดื่ม"], time: "17:00 - 23:30 น.", videoUrl: "" },
+  { id: 1, title: "สเต็กเนื้อนุ่ม", img: "/restaurants/1/1.png", fallbackImg: "https://picsum.photos/seed/steak/600/800", rating: "4.8", price: "฿฿", desc: "สเต็กเนื้อนุ่มละมุนลิ้น ย่างเตาถ่านหอมๆ เสิร์ฟพร้อมเฟรนช์ฟรายส์และสลัดผักสดออร์แกนิก บรรยากาศร้านชิลๆ เหมาะกับการมาทานกับเพื่อนหลังเลิกเรียน", tags: ["สเต็ก", "อาหารฝรั่ง"], time: "11:00 - 22:00 น.", videoUrl: "" },
+  { id: 2, title: "ของทอดทานเล่น", img: "/restaurants/2/2.png", fallbackImg: "https://picsum.photos/seed/fried/600/800", rating: "4.5", price: "฿", desc: "รวมมิตรของทอดกรอบอร่อย ทั้งเกี๊ยวทอด ลูกชิ้นทอด และไก่ทอด คลุกผงแซ่บๆ หลากหลายรสชาติ ทอดใหม่ร้อนๆ ทุกออเดอร์", tags: ["ของทานเล่น", "สตรีทฟู้ด"], time: "15:00 - 23:00 น.", videoUrl: "" },
+  { id: 3, title: "ก๋วยเตี๋ยวรสเด็ด", img: "/restaurants/3/3.png", fallbackImg: "https://picsum.photos/seed/noodle/600/800", rating: "4.9", price: "฿", desc: "ก๋วยเตี๋ยวต้มยำน้ำข้น รสชาติจัดจ้าน เครื่องแน่น หมูสับเน้นๆ ไข่ตานีเยิ้มๆ เส้นเหนียวนุ่ม ซดน้ำซุปคล่องคอสุดๆ", tags: ["เส้น", "ต้มยำ"], time: "09:00 - 20:00 น.", videoUrl: "" },
+  { id: 4, title: "ข้าวมันไก่สูตรไหหลำ", img: "/restaurants/4/4.png", fallbackImg: "https://picsum.photos/seed/chickenrice/600/800", rating: "4.7", price: "฿", desc: "ข้าวมันหอมนุ่ม ไก่ต้มเนื้อฉ่ำ ไม่ตบไก่ให้แบน น้ำจิ้มรสเด็ดสูตรต้นตำรับ พร้อมน้ำซุปฟักร้อนๆ ซดคล่องคอ", tags: ["จานเดียว", "ไก่"], time: "07:00 - 15:00 น.", videoUrl: "" },
+  { id: 5, title: "หมูกระทะบุฟเฟต์", img: "/restaurants/5/5.png", fallbackImg: "https://picsum.photos/seed/thaibbq/600/800", rating: "4.6", price: "฿฿", desc: "อิ่มไม่อั้นกับหมูกระทะเตาถ่าน หมูหมักนุ่มๆ สามชั้นสไลด์ และของทานเล่นเพียบ น้ำจิ้มสุกี้รสเด็ด เติมของตลอดไม่มีกั๊ก", tags: ["บุฟเฟต์", "ปิ้งย่าง"], time: "16:00 - 24:00 น.", videoUrl: "" },
+  { id: 6, title: "ยำแซ่บซี๊ด", img: "/restaurants/6/6.png", fallbackImg: "https://picsum.photos/seed/spicysalad/600/800", rating: "4.8", price: "฿฿", desc: "ยำรสแซ่บจัดจ้าน ปลาร้านัวๆ เครื่องแน่นทั้งกุ้งสด หมูยอ ไข่แดงเค็ม เลือกระดับความเผ็ดได้ตามใจชอบ", tags: ["ยำ", "รสจัด"], time: "11:00 - 21:00 น.", videoUrl: "" },
+  { id: 7, title: "คาเฟ่ขนมหวาน", img: "/restaurants/7/7.png", fallbackImg: "https://picsum.photos/seed/cafe/600/800", rating: "4.9", price: "฿฿", desc: "คาเฟ่สไตล์มินิมอล มีทั้งเค้ก บิงซู และเครื่องดื่มหลากหลาย มุมถ่ายรูปเพียบ เหมาะสำหรับมานั่งอ่านหนังสือหรือคุยงาน", tags: ["คาเฟ่", "ของหวาน"], time: "10:00 - 20:00 น.", videoUrl: "" },
+  { id: 8, title: "อาหารตามสั่งป้าสม", img: "/restaurants/8/8.png", fallbackImg: "https://picsum.photos/seed/thaifood/600/800", rating: "4.5", price: "฿", desc: "ร้านอาหารตามสั่งเจ้าเด็ด ข้าวกะเพราหมูกรอบไข่ดาวเยิ้มๆ ให้เยอะจุใจ รสชาติเข้มข้น ราคาเป็นมิตรกับนักศึกษา", tags: ["ตามสั่ง", "จานด่วน"], time: "08:00 - 18:00 น.", videoUrl: "" },
+  { id: 9, title: "ชาบูหม้อไฟ", img: "/restaurants/9/9.png", fallbackImg: "https://picsum.photos/seed/shabu/600/800", rating: "4.7", price: "฿฿฿", desc: "ชาบูน้ำซุปเข้มข้น เนื้อสไลด์พรีเมียม หมูคุโรบูตะ พร้อมน้ำจิ้มพอนสึและสุกี้ มีทั้งแบบ A La Carte และ Buffet", tags: ["ชาบู", "หม้อไฟ"], time: "11:00 - 22:00 น.", videoUrl: "" },
+  { id: 10, title: "โรตีชาชัก", img: "/restaurants/10/10-1.png", fallbackImg: "https://picsum.photos/seed/roti/600/800", rating: "4.6", price: "฿", desc: "โรตีกรอบนอกนุ่มใน ราดนมข้นหวานฉ่ำๆ ทานคู่กับชาชักรสเข้มข้น หอมกลิ่นชา เมนูแนะนำ: โรตีทิชชู่และชาชักเย็น", tags: ["ของหวาน", "เครื่องดื่ม"], time: "17:00 - 23:30 น.", videoUrl: "" },
 ];
 
 // Helper function สำหรับแปลง URL วิดีโอ YouTube ให้เป็น Embed URL
@@ -378,6 +378,21 @@ const MainPage = ({
           </a>
         </div>
         <div className="flex items-center gap-3">
+          {/* ปุ่มรีเซ็ตข้อมูล (แสดงเฉพาะในโหมดแก้ไข) */}
+          {isEditMode && (
+            <button 
+              onClick={() => {
+                if(window.confirm('คุณต้องการล้างข้อมูลที่แก้ไขไว้ทั้งหมด และกลับไปใช้ข้อมูลเริ่มต้นใช่หรือไม่?')) {
+                  localStorage.removeItem('restaurantsData');
+                  window.location.reload();
+                }
+              }}
+              className="flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-full transition-colors border bg-red-50 text-red-600 border-red-200 hover:bg-red-100"
+            >
+              <X className="w-4 h-4" /> รีเซ็ตข้อมูล
+            </button>
+          )}
+
           {/* ปุ่มเปิด/ปิด โหมดแก้ไข */}
           <button 
             onClick={onToggleEditMode}
@@ -532,7 +547,7 @@ const MainPage = ({
             <div>
               <h4 className="text-lg font-bold mb-6 text-white">ช่องทางการติดต่อ</h4>
               <div className="space-y-4">
-                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-brand-yellow transition-colors w-fit">
+                <a href="https://www.facebook.com/thanabodee.rugkew" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-brand-yellow transition-colors w-fit">
                   <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
                     <Facebook className="w-5 h-5" />
                   </div>
@@ -570,8 +585,19 @@ const MainPage = ({
 export default function App() {
   const [view, setView] = useState<'splash' | 'login' | 'main' | 'detail'>('splash');
   
-  // State สำหรับจัดการข้อมูลร้านอาหารและโหมดแก้ไข
-  const [restaurants, setRestaurants] = useState(INITIAL_RESTAURANTS);
+  // State สำหรับจัดการข้อมูลร้านอาหารและโหมดแก้ไข โดยดึงจาก localStorage ถ้ามี
+  const [restaurants, setRestaurants] = useState(() => {
+    const saved = localStorage.getItem('restaurantsData');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Failed to parse saved restaurants data");
+      }
+    }
+    return INITIAL_RESTAURANTS;
+  });
+  
   const [selectedRestaurant, setSelectedRestaurant] = useState<typeof INITIAL_RESTAURANTS[0] | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editingRestaurant, setEditingRestaurant] = useState<typeof INITIAL_RESTAURANTS[0] | null>(null);
@@ -589,7 +615,12 @@ export default function App() {
   };
 
   const handleSaveEdit = (updatedRestaurant: any) => {
-    setRestaurants(prev => prev.map(r => r.id === updatedRestaurant.id ? updatedRestaurant : r));
+    setRestaurants((prev: any[]) => {
+      const newRestaurants = prev.map(r => r.id === updatedRestaurant.id ? updatedRestaurant : r);
+      // บันทึกลง localStorage
+      localStorage.setItem('restaurantsData', JSON.stringify(newRestaurants));
+      return newRestaurants;
+    });
     setEditingRestaurant(null); // ปิด Modal
   };
 
