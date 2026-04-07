@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Kanit", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-green: #12734b;
+  --color-brand-light: #f4fdf8;
+  --color-brand-yellow: #f59e0b;
+}
+
+body {
+  font-family: "Kanit", sans-serif;
+  background-color: #fafafa;
+  -webkit-font-smoothing: antialiased;
+}
