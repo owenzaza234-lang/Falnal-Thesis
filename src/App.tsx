@@ -27,21 +27,22 @@ const ImageWithFallback = ({ src, fallbackSrc, alt, className, ...props }: any) 
 };
 
 // ข้อมูลร้านอาหารเริ่มต้น 10 ร้าน
-// 💡 คำแนะนำสำหรับการแก้ไขข้อมูลและรูปภาพ:
-// 1. รูปภาพทั้งหมดตอนนี้ถูกดึงมาจากโฟลเดอร์ `public/Fainal/` 
-// 2. หากคุณต้องการเปลี่ยนรูปภาพ ให้นำรูปใหม่ไปใส่ในโฟลเดอร์ `public/Fainal/` แล้วแก้ชื่อไฟล์ในโค้ดด้านล่าง (เช่น "/Fainal/1.png")
-// 3. คุณสามารถแก้ไข ชื่อร้าน (title), คำอธิบาย (desc), เรตติ้ง (rating), และอื่นๆ ได้ในโค้ดด้านล่างนี้เลยครับ
+// 💡 คำแนะนำสำหรับการแก้ไขรูปภาพด้วยตัวเอง:
+// 1. ระบบจะดึงรูปภาพจากโฟลเดอร์ `public/image/` ที่คุณสร้างไว้
+// 2. ให้นำไฟล์รูปที่คุณต้องการใช้มาใส่ในโฟลเดอร์ `public/image/` 
+// 3. และตั้งชื่อไฟล์ให้ตรงกับเลขร้าน เช่น ร้านแรกตั้งชื่อว่า "1.png", ร้านที่สอง "2.png" ไปเรื่อยๆ จนถึง "10.png"
+// 4. หลังจากเปลี่ยนไฟล์รูปภาพในโฟลเดอร์แล้ว ภาพในนี้จะเปลี่ยนตามอัตโนมัติครับ
 const INITIAL_RESTAURANTS = [
-  { id: 1, title: "สเต็กเนื้อนุ่ม", img: "/Fainal/1.png", fallbackImg: "https://picsum.photos/seed/steak/600/800", rating: "4.8", price: "฿฿", desc: "สเต็กเนื้อนุ่มละมุนลิ้น ย่างเตาถ่านหอมๆ เสิร์ฟพร้อมเฟรนช์ฟรายส์และสลัดผักสดออร์แกนิก บรรยากาศร้านชิลๆ เหมาะกับการมาทานกับเพื่อนหลังเลิกเรียน", tags: ["สเต็ก", "อาหารฝรั่ง"], time: "11:00 - 22:00 น.", videoUrl: "" },
-  { id: 2, title: "ของทอดทานเล่น", img: "/Fainal/2.png", fallbackImg: "https://picsum.photos/seed/fried/600/800", rating: "4.5", price: "฿", desc: "รวมมิตรของทอดกรอบอร่อย ทั้งเกี๊ยวทอด ลูกชิ้นทอด และไก่ทอด คลุกผงแซ่บๆ หลากหลายรสชาติ ทอดใหม่ร้อนๆ ทุกออเดอร์", tags: ["ของทานเล่น", "สตรีทฟู้ด"], time: "15:00 - 23:00 น.", videoUrl: "" },
-  { id: 3, title: "ก๋วยเตี๋ยวรสเด็ด", img: "/Fainal/3.png", fallbackImg: "https://picsum.photos/seed/noodle/600/800", rating: "4.9", price: "฿", desc: "ก๋วยเตี๋ยวต้มยำน้ำข้น รสชาติจัดจ้าน เครื่องแน่น หมูสับเน้นๆ ไข่ตานีเยิ้มๆ เส้นเหนียวนุ่ม ซดน้ำซุปคล่องคอสุดๆ", tags: ["เส้น", "ต้มยำ"], time: "09:00 - 20:00 น.", videoUrl: "" },
-  { id: 4, title: "ข้าวมันไก่สูตรไหหลำ", img: "/Fainal/4.png", fallbackImg: "https://picsum.photos/seed/chickenrice/600/800", rating: "4.7", price: "฿", desc: "ข้าวมันหอมนุ่ม ไก่ต้มเนื้อฉ่ำ ไม่ตบไก่ให้แบน น้ำจิ้มรสเด็ดสูตรต้นตำรับ พร้อมน้ำซุปฟักร้อนๆ ซดคล่องคอ", tags: ["จานเดียว", "ไก่"], time: "07:00 - 15:00 น.", videoUrl: "" },
-  { id: 5, title: "หมูกระทะบุฟเฟต์", img: "/Fainal/5.png", fallbackImg: "https://picsum.photos/seed/thaibbq/600/800", rating: "4.6", price: "฿฿", desc: "อิ่มไม่อั้นกับหมูกระทะเตาถ่าน หมูหมักนุ่มๆ สามชั้นสไลด์ และของทานเล่นเพียบ น้ำจิ้มสุกี้รสเด็ด เติมของตลอดไม่มีกั๊ก", tags: ["บุฟเฟต์", "ปิ้งย่าง"], time: "16:00 - 24:00 น.", videoUrl: "" },
-  { id: 6, title: "ยำแซ่บซี๊ด", img: "/Fainal/6.png", fallbackImg: "https://picsum.photos/seed/spicysalad/600/800", rating: "4.8", price: "฿฿", desc: "ยำรสแซ่บจัดจ้าน ปลาร้านัวๆ เครื่องแน่นทั้งกุ้งสด หมูยอ ไข่แดงเค็ม เลือกระดับความเผ็ดได้ตามใจชอบ", tags: ["ยำ", "รสจัด"], time: "11:00 - 21:00 น.", videoUrl: "" },
-  { id: 7, title: "คาเฟ่ขนมหวาน", img: "/Fainal/7.png", fallbackImg: "https://picsum.photos/seed/cafe/600/800", rating: "4.9", price: "฿฿", desc: "คาเฟ่สไตล์มินิมอล มีทั้งเค้ก บิงซู และเครื่องดื่มหลากหลาย มุมถ่ายรูปเพียบ เหมาะสำหรับมานั่งอ่านหนังสือหรือคุยงาน", tags: ["คาเฟ่", "ของหวาน"], time: "10:00 - 20:00 น.", videoUrl: "" },
-  { id: 8, title: "อาหารตามสั่งป้าสม", img: "/Fainal/8.png", fallbackImg: "https://picsum.photos/seed/thaifood/600/800", rating: "4.5", price: "฿", desc: "ร้านอาหารตามสั่งเจ้าเด็ด ข้าวกะเพราหมูกรอบไข่ดาวเยิ้มๆ ให้เยอะจุใจ รสชาติเข้มข้น ราคาเป็นมิตรกับนักศึกษา", tags: ["ตามสั่ง", "จานด่วน"], time: "08:00 - 18:00 น.", videoUrl: "" },
-  { id: 9, title: "ชาบูหม้อไฟ", img: "/Fainal/9.png", fallbackImg: "https://picsum.photos/seed/shabu/600/800", rating: "4.7", price: "฿฿฿", desc: "ชาบูน้ำซุปเข้มข้น เนื้อสไลด์พรีเมียม หมูคุโรบูตะ พร้อมน้ำจิ้มพอนสึและสุกี้ มีทั้งแบบ A La Carte และ Buffet", tags: ["ชาบู", "หม้อไฟ"], time: "11:00 - 22:00 น.", videoUrl: "" },
-  { id: 10, title: "โรตีชาชัก", img: "/Fainal/10.png", fallbackImg: "https://picsum.photos/seed/roti/600/800", rating: "4.6", price: "฿", desc: "โรตีกรอบนอกนุ่มใน ราดนมข้นหวานฉ่ำๆ ทานคู่กับชาชักรสเข้มข้น หอมกลิ่นชา เมนูแนะนำ: โรตีทิชชู่และชาชักเย็น", tags: ["ของหวาน", "เครื่องดื่ม"], time: "17:00 - 23:30 น.", videoUrl: "" },
+  { id: 1, title: "ร้าน Bad bad burger (ร้านสเต็ก,เบอร์เกอร์)", img: "/image/1.png", fallbackImg: "https://picsum.photos/seed/burger1/600/800", rating: "4.8", price: "฿฿", desc: "ร้านเบอร์เกอร์และสเต็กเนื้อฉ่ำๆ บรรยากาศเป็นกันเอง รสชาติจัดเต็มอร่อยคุ้มราคา", tags: ["เบอร์เกอร์", "สเต็ก"], time: "11:00 - 22:00 น.", videoUrl: "" },
+  { id: 2, title: "ร้าน ครัวสุโขทัย (ก๊วยเตี๋ยว+ตามสั่ง)", img: "/image/2.png", fallbackImg: "https://picsum.photos/seed/noodle2/600/800", rating: "4.5", price: "฿", desc: "ร้านเด็ดหน้าม. มีทั้งก๋วยเตี๋ยวต้มยำสุโขทัยรสแซ่บ และอาหารตามสั่งให้เลือกหลากหลาย", tags: ["ก๋วยเตี๋ยว", "ตามสั่ง"], time: "09:00 - 20:00 น.", videoUrl: "" },
+  { id: 3, title: "Keaw Thod (ร้านเกี๊ยว หน้า ม.ศรีปทุม)", img: "/image/3.png", fallbackImg: "https://picsum.photos/seed/fried3/600/800", rating: "4.9", price: "฿", desc: "เกี๊ยวทอดกรอบๆ ไส้แน่นๆ ทอดร้อนๆ พร้อมน้ำจิ้มรสเด็ด ขวัญใจเด็กศรีปทุม", tags: ["เกี๊ยวทอด", "ของทานเล่น"], time: "15:00 - 23:00 น.", videoUrl: "" },
+  { id: 4, title: "ชวง ชวงเวย (ร้านหม่าล่า ชั่งขีด)", img: "/image/4.png", fallbackImg: "https://picsum.photos/seed/mala4/600/800", rating: "4.7", price: "฿฿", desc: "หม่าล่าแบบชั่งขีด เลือกระดับความเผ็ดชาได้ตามใจชอบ วัตถุดิบสดใหม่ ซุปเข้มข้นถึงใจ", tags: ["หม่าล่า", "ปิ้งย่าง"], time: "16:00 - 24:00 น.", videoUrl: "" },
+  { id: 5, title: "ก๋วยเตี๋ยวเรือนายเกรียง", img: "/image/5.png", fallbackImg: "https://picsum.photos/seed/boatnoodle5/600/800", rating: "4.6", price: "฿", desc: "ก๋วยเตี๋ยวเรือน้ำตกเข้มข้น หมูนุ่ม ตับหวาน กากหมูเจียวกรอบๆ ชามเดียวไม่เคยพอ", tags: ["ก๋วยเตี๋ยวเรือ", "อาหารไทย"], time: "08:00 - 18:00 น.", videoUrl: "" },
+  { id: 6, title: "Wallace", img: "/image/6.png", fallbackImg: "https://picsum.photos/seed/wallace6/600/800", rating: "4.8", price: "฿฿", desc: "ร้านคาเฟ่และอาหารฟิวชั่น บรรยากาศดี ถ่ายรูปสวย เหมาะกับมานั่งพักผ่อนสังสรรค์", tags: ["คาเฟ่", "ฟิวชั่น"], time: "10:00 - 21:00 น.", videoUrl: "" },
+  { id: 7, title: "ครัวเจ๊ป๊อก", img: "/image/7.png", fallbackImg: "https://picsum.photos/seed/pok7/600/800", rating: "4.9", price: "฿", desc: "อาหารตามสั่งรสจัดจ้าน ให้เยอะ คุ้มค่า จานด่วนอิ่มอร่อย เมนูกะเพราคือที่สุด", tags: ["ตามสั่ง", "จานด่วน"], time: "10:00 - 20:00 น.", videoUrl: "" },
+  { id: 8, title: "ร้านข้าวกะเตี๋ยว", img: "/image/8.png", fallbackImg: "https://picsum.photos/seed/rice8/600/800", rating: "4.5", price: "฿", desc: "รวบตึงทั้งเมนูข้าวและก๋วยเตี๋ยวในร้านเดียว อร่อยครบจบทุกความหิว", tags: ["ข้าว", "ก๋วยเตี๋ยว"], time: "09:00 - 20:00 น.", videoUrl: "" },
+  { id: 9, title: "ก๋วยเตี๋ยวเรือ ป.ประทีป", img: "/image/9.png", fallbackImg: "https://picsum.photos/seed/shabu9/600/800", rating: "4.7", price: "฿฿฿", desc: "ชาบูน้ำซุปเข้มข้น เนื้อสไลด์พรีเมียม หมูคุโรบูตะ พร้อมน้ำจิ้มพอนสึและสุกี้ มีทั้งแบบ A La Carte และ Buffet", tags: ["ชาบู", "หม้อไฟ"], time: "11:00 - 22:00 น.", videoUrl: "" },
+  { id: 10, title: "ร้าน ทอด อบ ย่าง", img: "/image/10.png", fallbackImg: "https://picsum.photos/seed/roti10/600/800", rating: "4.6", price: "฿", desc: "โรตีกรอบนอกนุ่มใน ราดนมข้นหวานฉ่ำๆ ทานคู่กับชาชักรสเข้มข้น หอมกลิ่นชา เมนูแนะนำ: โรตีทิชชู่และชาชักเย็น", tags: ["ของหวาน", "เครื่องดื่ม"], time: "17:00 - 23:30 น.", videoUrl: "" },
 ];
 
 // Helper function สำหรับแปลง URL วิดีโอ YouTube ให้เป็น Embed URL
@@ -458,18 +459,7 @@ export default function App() {
   const [view, setView] = useState<'splash' | 'login' | 'main' | 'detail'>('splash');
   
   // State สำหรับจัดการข้อมูลร้านอาหารและโหมดแก้ไข โดยดึงจาก localStorage ถ้ามี
-  const [restaurants, setRestaurants] = useState(() => {
-    const saved = localStorage.getItem('restaurantsData');
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch (e) {
-        console.error("Failed to parse saved restaurants data");
-      }
-    }
-    return INITIAL_RESTAURANTS;
-  });
-  
+  const [restaurants, setRestaurants] = useState<typeof INITIAL_RESTAURANTS>(INITIAL_RESTAURANTS);
   const [selectedRestaurant, setSelectedRestaurant] = useState<typeof INITIAL_RESTAURANTS[0] | null>(null);
 
   const handleSelectRestaurant = (restaurant: typeof INITIAL_RESTAURANTS[0]) => {
