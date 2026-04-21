@@ -138,101 +138,6 @@ const LoginScreen = ({ onLogin }: { onLogin: () => void }) => {
   );
 };
 
-// Modal สำหรับแก้ไขข้อมูลร้านอาหาร
-const EditRestaurantModal = ({ restaurant, onSave, onClose }: any) => {
-  const [formData, setFormData] = useState({
-    ...restaurant,
-    tags: restaurant.tags.join(', ') // แปลง array เป็น string เพื่อให้แก้ไขง่าย
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev: any) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // แปลง tags กลับเป็น array
-    const updatedRestaurant = {
-      ...formData,
-      tags: formData.tags.split(',').map((t: string) => t.trim()).filter(Boolean)
-    };
-    onSave(updatedRestaurant);
-  };
-
-  return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-      <motion.div 
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        className="bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl"
-      >
-        <div className="flex justify-between items-center p-6 border-b border-gray-100">
-          <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <Edit2 className="w-6 h-6 text-brand-green" /> แก้ไขข้อมูลร้านอาหาร
-          </h2>
-          <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-            <X className="w-6 h-6 text-gray-500" />
-          </button>
-        </div>
-        
-        <div className="p-6 overflow-y-auto flex-1">
-          <form id="edit-form" onSubmit={handleSubmit} className="space-y-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="space-y-1.5">
-                <label className="text-sm font-bold text-gray-700">ชื่อร้าน</label>
-                <input required type="text" name="title" value={formData.title} onChange={handleChange} className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green/50 outline-none" />
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-sm font-bold text-gray-700">คะแนน (เช่น 4.8)</label>
-                <input required type="text" name="rating" value={formData.rating} onChange={handleChange} className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green/50 outline-none" />
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-sm font-bold text-gray-700">ราคา (เช่น ฿฿)</label>
-                <input required type="text" name="price" value={formData.price} onChange={handleChange} className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green/50 outline-none" />
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-sm font-bold text-gray-700">เวลาเปิด-ปิด</label>
-                <input required type="text" name="time" value={formData.time} onChange={handleChange} className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green/50 outline-none" />
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-sm font-bold text-gray-700">หมวดหมู่ / แท็ก (คั่นด้วยลูกน้ำ ,)</label>
-              <input required type="text" name="tags" value={formData.tags} onChange={handleChange} placeholder="เช่น สเต็ก, อาหารฝรั่ง" className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green/50 outline-none" />
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-sm font-bold text-gray-700">URL รูปภาพสำรอง (Fallback Image)</label>
-              <input required type="text" name="fallbackImg" value={formData.fallbackImg} onChange={handleChange} className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green/50 outline-none" />
-              <p className="text-xs text-gray-500">รูปนี้จะแสดงเมื่อไม่มีรูปในโฟลเดอร์ public/restaurants/{formData.id}/cover.jpg</p>
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-sm font-bold text-gray-700">URL วิดีโอรีวิว (YouTube Link)</label>
-              <input type="text" name="videoUrl" value={formData.videoUrl || ''} onChange={handleChange} placeholder="เช่น https://www.youtube.com/watch?v=..." className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green/50 outline-none" />
-              <p className="text-xs text-gray-500">ใส่ลิงก์ YouTube เพื่อแสดงวิดีโอในหน้ารายละเอียดร้าน (เว้นว่างได้)</p>
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-sm font-bold text-gray-700">รายละเอียดร้าน / รีวิว</label>
-              <textarea required name="desc" value={formData.desc} onChange={handleChange} rows={4} className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-green/50 outline-none resize-none"></textarea>
-            </div>
-          </form>
-        </div>
-
-        <div className="p-6 border-t border-gray-100 bg-gray-50 rounded-b-3xl flex justify-end gap-3">
-          <button onClick={onClose} className="px-6 py-2.5 rounded-xl font-bold text-gray-600 hover:bg-gray-200 transition-colors">
-            ยกเลิก
-          </button>
-          <button type="submit" form="edit-form" className="px-6 py-2.5 rounded-xl font-bold bg-brand-green text-white hover:bg-[#0d5234] transition-colors flex items-center gap-2 shadow-lg shadow-brand-green/20">
-            <Save className="w-5 h-5" /> บันทึกข้อมูล
-          </button>
-        </div>
-      </motion.div>
-    </div>
-  );
-};
 
 const RestaurantDetail = ({ restaurant, onBack }: { restaurant: typeof INITIAL_RESTAURANTS[0], onBack: () => void }) => {
   useEffect(() => {
@@ -338,10 +243,7 @@ const RestaurantDetail = ({ restaurant, onBack }: { restaurant: typeof INITIAL_R
 
 const MainPage = ({ 
   restaurants, 
-  onSelectRestaurant, 
-  isEditMode, 
-  onToggleEditMode,
-  onEditRestaurant
+  onSelectRestaurant 
 }: any) => {
   return (
     <motion.div
@@ -382,29 +284,6 @@ const MainPage = ({
           </a>
         </div>
         <div className="flex items-center gap-3">
-          {/* ปุ่มรีเซ็ตข้อมูล (แสดงเฉพาะในโหมดแก้ไข) */}
-          {isEditMode && (
-            <button 
-              onClick={() => {
-                if(window.confirm('คุณต้องการล้างข้อมูลที่แก้ไขไว้ทั้งหมด และกลับไปใช้ข้อมูลเริ่มต้นใช่หรือไม่?')) {
-                  localStorage.removeItem('restaurantsData');
-                  window.location.reload();
-                }
-              }}
-              className="flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-full transition-colors border bg-red-50 text-red-600 border-red-200 hover:bg-red-100"
-            >
-              <X className="w-4 h-4" /> รีเซ็ตข้อมูล
-            </button>
-          )}
-
-          {/* ปุ่มเปิด/ปิด โหมดแก้ไข */}
-          <button 
-            onClick={onToggleEditMode}
-            className={`flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-full transition-colors border ${isEditMode ? 'bg-yellow-100 text-yellow-700 border-yellow-300' : 'bg-gray-100 text-gray-600 border-gray-200 hover:bg-gray-200'}`}
-          >
-            <Settings className="w-4 h-4" /> {isEditMode ? 'ปิดโหมดแก้ไข' : 'โหมดแก้ไข'}
-          </button>
-          
           <button className="flex items-center gap-2 text-sm font-bold bg-brand-green text-white px-5 py-2 rounded-full hover:bg-[#0d5234] transition-colors shadow-md shadow-brand-green/20">
             <User className="w-4 h-4" /> เข้าสู่ระบบ
           </button>
@@ -503,20 +382,9 @@ const MainPage = ({
                 transition={{ delay: (idx % 4) * 0.1 }}
                 className="group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 bg-white border border-gray-100 flex flex-col relative"
               >
-                {/* ปุ่มแก้ไข (แสดงเฉพาะตอนเปิดโหมดแก้ไข) */}
-                {isEditMode && (
-                  <button 
-                    onClick={(e) => { e.stopPropagation(); onEditRestaurant(item); }}
-                    className="absolute top-4 left-4 z-20 bg-yellow-400 text-yellow-900 p-2 rounded-full shadow-lg hover:bg-yellow-300 hover:scale-110 transition-all"
-                    title="แก้ไขข้อมูลร้าน"
-                  >
-                    <Edit2 className="w-5 h-5" />
-                  </button>
-                )}
-
                 <div 
                   className="aspect-[4/5] relative overflow-hidden cursor-pointer"
-                  onClick={() => !isEditMode && onSelectRestaurant(item)}
+                  onClick={() => onSelectRestaurant(item)}
                 >
                   <ImageWithFallback src={item.img} fallbackSrc={item.fallbackImg} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" referrerPolicy="no-referrer" />
                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm z-10">
@@ -527,7 +395,7 @@ const MainPage = ({
                     <span className="text-white font-bold text-xl mb-1 translate-y-2 group-hover:translate-y-0 transition-transform">{item.title}</span>
                     <div className="flex items-center gap-2 text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity delay-100">
                       <span className="bg-brand-green/80 text-white px-2 py-0.5 rounded text-xs font-bold">{item.price}</span>
-                      <span>{isEditMode ? 'คลิกปุ่มสีเหลืองเพื่อแก้ไข' : 'คลิกเพื่อดูรีวิว'}</span>
+                      <span>คลิกเพื่อดูรีวิว</span>
                     </div>
                   </div>
                 </div>
@@ -603,8 +471,6 @@ export default function App() {
   });
   
   const [selectedRestaurant, setSelectedRestaurant] = useState<typeof INITIAL_RESTAURANTS[0] | null>(null);
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [editingRestaurant, setEditingRestaurant] = useState<typeof INITIAL_RESTAURANTS[0] | null>(null);
 
   const handleSelectRestaurant = (restaurant: typeof INITIAL_RESTAURANTS[0]) => {
     setSelectedRestaurant(restaurant);
@@ -618,16 +484,6 @@ export default function App() {
     }, 100);
   };
 
-  const handleSaveEdit = (updatedRestaurant: any) => {
-    setRestaurants((prev: any[]) => {
-      const newRestaurants = prev.map(r => r.id === updatedRestaurant.id ? updatedRestaurant : r);
-      // บันทึกลง localStorage
-      localStorage.setItem('restaurantsData', JSON.stringify(newRestaurants));
-      return newRestaurants;
-    });
-    setEditingRestaurant(null); // ปิด Modal
-  };
-
   return (
     <>
       <AnimatePresence mode="wait">
@@ -638,9 +494,6 @@ export default function App() {
             key="main" 
             restaurants={restaurants}
             onSelectRestaurant={handleSelectRestaurant} 
-            isEditMode={isEditMode}
-            onToggleEditMode={() => setIsEditMode(!isEditMode)}
-            onEditRestaurant={setEditingRestaurant}
           />
         )}
         {view === 'detail' && selectedRestaurant && (
@@ -648,17 +501,6 @@ export default function App() {
             key="detail" 
             restaurant={selectedRestaurant} 
             onBack={handleBackToMain} 
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Modal แก้ไขร้านอาหาร จะแสดงเมื่อมีการกดปุ่มแก้ไข */}
-      <AnimatePresence>
-        {editingRestaurant && (
-          <EditRestaurantModal 
-            restaurant={editingRestaurant} 
-            onSave={handleSaveEdit} 
-            onClose={() => setEditingRestaurant(null)} 
           />
         )}
       </AnimatePresence>
